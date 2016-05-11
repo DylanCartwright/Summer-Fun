@@ -1,0 +1,100 @@
+// File: PigLatin.java
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import acm.program.*;
+
+/**
+ *  This class provides methods that convert words and lines of test
+ *  into Pig Latin.
+ *
+ *  The rules are:
+ *    1. if a word has no vowels, it stays the same
+ *    2. if a word starts with a vowel, add "way" to the end
+ *    3. if a word's first vowel is at position i, move the first
+ *       3-1 characters to the end, and append "ay".
+ *
+ *  @author  Jim Schnepf, modified by J. Andrew Whitford Holey
+ *  @version October 31, 2013
+ */
+public class PigLatin {
+  
+  /**
+   * Returns true if c is an English vowel.
+   */
+  public static boolean isVowel(char c) {
+    c = Character.toLowerCase(c);
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+  }
+  
+  /**
+   * Returns the index of the first vowel in a word, or -1
+   * if there are no vowels.
+   */
+  private static int indexOfFirstVowel(String s) {
+    for (int i = 0; i < s.length(); i++) {
+      if (isVowel(s.charAt(i))) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  
+  /**
+   * Converts a sequence of words into Pig Latin.
+   *
+   * @param  line the String containing the words
+   * @return a sequence of words in Pig Latin,
+   *         each converted from the corresponding word in line
+   */
+  public static String convertLine(String line) {
+    String result = "";
+    for(String word : line.split(" ")) {
+      result = result + convertWord(word) + " ";
+    }
+    return(result);
+  }
+  
+  /**
+   * Converts a word into a Pig Latin word.
+   *
+   * @param  word the String containing the word to be converted
+   * @return word converted to Pig Latin
+   */
+  public static String convertWord(String word) {
+    /*** Fill in your code here.
+      *   Use indexOfFirstVowel() to find the position of the first vowel.
+      *   Then follow the rules at the top of this file,
+      *   using the substring() method and concatenation operator
+      *   to construct the Pig Latin word
+      */
+    for ( int i =0 ; i < word.length(); i++){
+
+    if (isVowel(word.charAt(0))){
+      return (word + "way");
+    }
+    
+    else if (!(word.contains("a") || word.contains("e") || word.contains("i") || word.contains("o") || word.contains("u")))
+    {
+      return word;}
+    else { int e = indexOfFirstVowel(word);
+      int e2 = word.length();
+      
+      String e3 = "" + word.substring(e,e+1).toUpperCase();
+      String e3a ="" + word.substring(e+1,e2).toLowerCase();
+      
+      String e4 = "" + word.substring(0,e).toLowerCase();
+      return e3 + e3a + e4 + "ay";
+    }
+  }
+    return word ;}
+
+
+}
+    
+    
+   
+  
+  
+
